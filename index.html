@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Harsh Agarwal · Software Engineer</title>
+  <meta name="description" content="Harsh Agarwal is a software engineer and Penn State computer science student (May 2027) who has built and launched two production systems as a sole developer.">
+  <meta property="og:title" content="Harsh Agarwal · Software Engineer">
+  <meta property="og:description" content="Four true stories about things that went wrong in software I built, each with a demo you can click. Penn State CS, graduating May 2027.">
+  <meta property="og:type" content="website">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23d9441e'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' text-anchor='middle' fill='%23fff'%3EH%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#work">Skip to work</a>
+
+  <header class="nav">
+    <a class="nav__name" href="#top">Harsh Agarwal</a>
+    <nav class="nav__links" aria-label="Sections">
+      <a href="#work">Work</a>
+      <a href="#approach">Approach</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="btn btn--small" href="Harsh_Agarwal_Resume.pdf" target="_blank" rel="noopener">Resume</a>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <p class="eyebrow">Software engineer · Penn State Computer Science, May 2027</p>
+      <h1>I build software that real teams <em>run their day on.</em></h1>
+      <p class="hero__lede">
+        This is not my resume; that is one click away. These are four true stories about things that went
+        wrong in software I built, and what I did about each one. Every story has something you can click.
+        I graduate in May 2027 and I'm looking for a full-time software engineering role.
+      </p>
+      <div class="hero__actions">
+        <a class="btn" href="Harsh_Agarwal_Resume.pdf" target="_blank" rel="noopener">Download resume</a>
+        <a class="btn btn--ghost" href="mailto:harshcollege06@gmail.com">Email me</a>
+        <a class="link" href="https://github.com/Harshagarwal06" target="_blank" rel="noopener">GitHub</a>
+        <a class="link" href="https://www.linkedin.com/in/harshnagarwal" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </section>
+
+    <section class="proof" aria-label="Key numbers">
+      <div class="proof__item">
+        <span class="proof__num">173</span>
+        <span class="proof__label">employees across 19 departments use a platform I built alone</span>
+      </div>
+      <div class="proof__item">
+        <span class="proof__num">58</span>
+        <span class="proof__label">pull requests reviewed and merged behind CI on that platform</span>
+      </div>
+      <div class="proof__item">
+        <span class="proof__num">96</span>
+        <span class="proof__label">automated tests running in CI on DrawVault</span>
+      </div>
+      <div class="proof__item">
+        <span class="proof__num">3.88</span>
+        <span class="proof__label">GPA, with minors in Mathematics and Economics</span>
+      </div>
+    </section>
+
+    <section id="work" class="section">
+      <header class="section__head">
+        <span class="section__no">01</span>
+        <h2>Four things that went wrong</h2>
+      </header>
+      <p class="section__intro">
+        Short on time? Each card is the whole story in one line. Everything here happened; in the two
+        client stories the client is unnamed and the demo numbers are illustrative.
+      </p>
+      <ol class="index">
+        <li><a href="#story-pms"><span class="index__project">PMS Pro</span><span class="index__title">The green screen that was lying</span><span class="index__line">A page said all clear while showing a slice of the data.</span></a></li>
+        <li><a href="#story-drawvault"><span class="index__project">DrawVault</span><span class="index__title">A login inside a link</span><span class="index__line">A PDF link carried the user's whole login.</span></a></li>
+        <li><a href="#story-chai"><span class="index__project">Photo Shopping</span><span class="index__title">Stop translating chai to tea</span><span class="index__line">A harmless-looking translation chose the wrong product.</span></a></li>
+        <li><a href="#story-news"><span class="index__project">News Buddy</span><span class="index__title">Three long labels took down a day</span><span class="index__line">One small check cancelled a whole day's digest.</span></a></li>
+      </ol>
+
+      <article class="story" id="story-pms">
+        <aside class="story__meta">
+          <p class="story__project">PMS Pro</p>
+          <p>The platform a real-estate company's 173 employees use to track goals and daily tasks. I built and launched it alone.</p>
+          <p class="story__stack">React · TypeScript · PostgreSQL · Supabase</p>
+        </aside>
+        <div class="story__body">
+          <h3>The green screen that was lying.</h3>
+          <p class="story__short">A page told managers everything was fine while showing them only a slice of the data. I found why, fixed it, and proved the fix against the live system.</p>
+          <p>
+            One day the goals page showed a calm green message: nothing needs action this month. It was
+            wrong. A large share of that month's goals had not even been started.
+          </p>
+          <p>
+            Nothing had crashed. The database layer returns at most 1,000 rows per request and reports the
+            real total only in a response header that my code never read. Once the table grew past 1,000
+            rows, every screen kept working and quietly showed a slice of the data, all of it from a single
+            month. Eight other screens were reading the same slice.
+          </p>
+          <p>
+            The fix was to fetch page after page until the count matched the total, with a stable sort so
+            no row is skipped or repeated between pages. Then I checked it against the live system: every
+            row present, zero duplicates, all twelve months.
+          </p>
+
+          <div class="demo" id="demo-rows">
+            <p class="demo__title">Try it: open the goals page</p>
+            <p class="demo__note">Each bar is one month of goals. Illustrative numbers.</p>
+            <p class="status status--ok" id="rows-status"></p>
+            <div class="months" id="rows-months" role="img" aria-label="Twelve months of goals, showing which months have been loaded"></div>
+            <div class="demo__controls">
+              <button class="btn btn--small" type="button" id="rows-fetch">Fetch every page</button>
+              <button class="link link--button" type="button" id="rows-reset">Reset</button>
+            </div>
+            <p class="demo__log" id="rows-log" aria-live="polite"></p>
+          </div>
+
+          <p class="lesson">A confident all-clear is worse than an error. Nobody investigates a green screen.</p>
+        </div>
+      </article>
+
+      <article class="story" id="story-drawvault">
+        <aside class="story__meta">
+          <p class="story__project">DrawVault</p>
+          <p>Where a construction team keeps every drawing and every revision. I built it alone, and 20+ architects and project staff use it daily.</p>
+          <p class="story__stack">React · Node.js · Express · SQLite · Cloudflare R2</p>
+        </aside>
+        <div class="story__body">
+          <h3>A login inside a link.</h3>
+          <p class="story__short">A PDF link carried the user's whole login. I replaced it with a two-minute, single-file token and made every login revocable.</p>
+          <p>
+            To open a PDF cover sheet in a new tab, the link carried the user's login token in its address.
+            It worked. It also meant the link was the login: addresses end up in browser history and
+            forwarded messages, and that token was good for the whole account.
+          </p>
+          <p>
+            I replaced it with a token that does one thing: open that one file, for two minutes. A few days
+            earlier I had made logins revocable. Each account carries a version number and every token is
+            stamped with it. Changing a password or a role, or deactivating an account, raises the number,
+            so every older token stops working at once.
+          </p>
+
+          <div class="demo" id="demo-tokens">
+            <p class="demo__title">Try it: sign out everywhere</p>
+            <p class="demo__note">One account, signed in on two devices. A simplified model of the real check.</p>
+            <div class="devices">
+              <div class="device" id="tok-server"></div>
+              <div class="device" id="tok-laptop"></div>
+              <div class="device" id="tok-phone"></div>
+            </div>
+            <div class="demo__controls">
+              <button class="btn btn--small btn--ghost" type="button" id="tok-open">Phone: open a drawing</button>
+              <button class="btn btn--small" type="button" id="tok-change">Laptop: change password</button>
+              <button class="link link--button" type="button" id="tok-reset">Reset</button>
+            </div>
+            <p class="demo__log" id="tok-log" aria-live="polite"></p>
+          </div>
+
+          <p class="lesson">A token should do the least it needs to, for the shortest time.</p>
+        </div>
+      </article>
+
+      <article class="story" id="story-chai">
+        <aside class="story__meta">
+          <p class="story__project">Photo Shopping</p>
+          <p>Reads a photo of a handwritten grocery list, in English, Hindi or a mix of both, and builds price-compared carts on three Indian delivery apps.</p>
+          <p class="story__stack">Python · FastAPI · macOS Vision OCR · OAuth 2.1 · MCP</p>
+          <a class="link" href="https://github.com/Harshagarwal06/photo_shopping" target="_blank" rel="noopener">View on GitHub</a>
+        </aside>
+        <div class="story__body">
+          <h3>Stop translating chai to tea.</h3>
+          <p class="story__short">A translation that looked harmless was putting the wrong product in the cart. I caught it by testing what the user would actually receive.</p>
+          <p>
+            Early on I translated Hindi words to English before searching: jeera to cumin, haldi to
+            turmeric, chai to tea. I tested "chai" against "tea" on one app, got the same five products
+            back, and decided the translation was harmless.
+          </p>
+          <p>
+            It wasn't. The ranker scores how many words of the search appear in a product's name, then lets
+            price break ties. "Masala tea" matched a ₹99 box of instant premix as well as it matched loose
+            masala chai at ₹170, so the cheaper one won. Someone who wrote "masala chai" would have got
+            sachets.
+          </p>
+          <p>
+            I stopped translating chai, then tested every other translation the same way. Most made no
+            difference. One was essential: searching "pyaz" returned baby potatoes, while "onion" returned
+            onions.
+          </p>
+
+          <div class="demo" id="demo-chai">
+            <p class="demo__title">Try it: the list says "masala chai"</p>
+            <label class="switch">
+              <input type="checkbox" id="chai-toggle" checked>
+              <span>Translate chai to tea before searching</span>
+            </label>
+            <p class="demo__log" id="chai-query" aria-live="polite"></p>
+            <div class="products" id="chai-products"></div>
+          </div>
+
+          <p class="lesson">The same search results are not the same decision. Test what the user actually gets.</p>
+          <p class="proof-link"><a class="link" href="https://github.com/Harshagarwal06/photo_shopping/commit/4b292897f9c5b92e66878a6fe0cf63877b6a2634" target="_blank" rel="noopener">Proof: read the commit</a></p>
+        </div>
+      </article>
+
+      <article class="story" id="story-news">
+        <aside class="story__meta">
+          <p class="story__project">News Buddy</p>
+          <p>Writes a daily AI-news digest by itself: fetch, de-duplicate, summarise, illustrate, publish.</p>
+          <p class="story__stack">Python · LangGraph · ChromaDB · FastMCP · Docker · OpenTelemetry</p>
+          <a class="link" href="https://github.com/Harshagarwal06/buddy_agent" target="_blank" rel="noopener">View on GitHub</a>
+        </aside>
+        <div class="story__body">
+          <h3>Three long labels took down a whole day.</h3>
+          <p class="story__short">Three slightly-too-long labels cancelled a whole day's digest. I changed the pipeline so one bad part costs only that part.</p>
+          <p>
+            On 1 August it published nothing. The cause was three image labels that were slightly over a
+            length limit. One check treated that as fatal and threw away the article's image plan, and a
+            later step refused to publish any digest with a missing plan. The renderer already trimmed long
+            labels, so the check was guarding against a problem that did not exist.
+          </p>
+          <p>
+            The code had merged two questions: is this one image usable, and should we publish at all? I
+            separated them. An article with a bad image plan now goes out without an image, never with a
+            fake one, and everything else publishes as normal.
+          </p>
+
+          <div class="demo" id="demo-digest">
+            <p class="demo__title">Try it: one article has a bad image plan</p>
+            <div class="segmented" role="group" aria-label="Version of the pipeline">
+              <button type="button" id="digest-before" aria-pressed="true">Before the fix</button>
+              <button type="button" id="digest-after" aria-pressed="false">After the fix</button>
+            </div>
+            <ul class="articles" id="digest-list"></ul>
+            <p class="demo__log" id="digest-log" aria-live="polite"></p>
+          </div>
+
+          <p class="lesson">One bad part should cost one part.</p>
+          <p class="proof-link"><a class="link" href="https://github.com/Harshagarwal06/buddy_agent/pull/10" target="_blank" rel="noopener">Proof: read the pull request</a></p>
+        </div>
+      </article>
+    </section>
+
+    <section id="approach" class="section">
+      <header class="section__head">
+        <span class="section__no">02</span>
+        <h2>How I work</h2>
+      </header>
+      <div class="approach">
+        <p class="approach__lede">
+          I build with AI coding agents, and I stay responsible for what ships.
+        </p>
+        <ol class="steps">
+          <li >
+            <span class="steps__no">1</span>
+            <h3>Write it down first</h3>
+            <p>Every major feature starts as a written spec and plan: what it does, what it must never do, and how to tell it works.</p>
+          </li>
+          <li >
+            <span class="steps__no">2</span>
+            <h3>Let the agent build on a branch</h3>
+            <p>Claude Code or Lovable builds the feature on its own branch, working from the plan and never directly on the main code.</p>
+          </li>
+          <li >
+            <span class="steps__no">3</span>
+            <h3>Review, then merge</h3>
+            <p>I read the change before it goes in. On PMS Pro that was 58 pull requests, each gated by type checks, 44 test files and a build.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <header class="section__head">
+        <span class="section__no">03</span>
+        <h2>About</h2>
+      </header>
+      <div class="about">
+        <div class="about__text">
+          <p>
+            I study Computer Science at Penn State, with minors in Mathematics and Economics, and graduate
+            in May 2027 with a 3.88 GPA. Coursework includes systems programming in C, computer
+            organization, operating systems and algorithms.
+          </p>
+          <p>
+            Since August 2025 I have also worked as a math peer tutor and grader. I teach Calculus II and
+            Vector Analysis to 20+ students a week and grade 100+ submissions weekly. Explaining a hard
+            idea until it lands is the same skill I use when writing a spec.
+          </p>
+          <p>I'm open to relocation.</p>
+          <dl class="timeline">
+            <dt>Now</dt><dd>Writing a small file system in C for my operating systems course.</dd>
+            <dt>May 2026 to now</dt><dd>Freelance software engineer; sole developer of PMS Pro and DrawVault.</dd>
+            <dt>Aug 2025 to now</dt><dd>Math peer tutor and grader, Penn State.</dd>
+            <dt>May 2027</dt><dd>B.S. Computer Science, Penn State (expected).</dd>
+          </dl>
+        </div>
+        <dl class="skills">
+          <dt>Languages</dt>
+          <dd>Python, TypeScript, JavaScript, Java, C++, SQL, HTML/CSS</dd>
+          <dt>Frameworks</dt>
+          <dd>React, Node.js, Express.js, FastAPI, LangGraph</dd>
+          <dt>Data and cloud</dt>
+          <dd>PostgreSQL, SQLite, Supabase, ChromaDB, Cloudflare R2, Vercel, Railway</dd>
+          <dt>Engineering</dt>
+          <dd>Git, GitHub Actions, Docker, CI/CD, OpenTelemetry, OAuth, JWT, RBAC, RAG, MCP</dd>
+          <dt>AI coding tools</dt>
+          <dd>Claude Code, Lovable</dd>
+        </dl>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <p class="eyebrow">Contact</p>
+      <h2>Hiring for 2027? <em>Let's talk.</em></h2>
+      <a class="contact__mail" href="mailto:harshcollege06@gmail.com">harshcollege06@gmail.com</a>
+      <div class="hero__actions">
+        <a class="btn" href="Harsh_Agarwal_Resume.pdf" target="_blank" rel="noopener">Download resume</a>
+        <a class="link" href="https://github.com/Harshagarwal06" target="_blank" rel="noopener">GitHub</a>
+        <a class="link" href="https://www.linkedin.com/in/harshnagarwal" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>Harsh Navin Agarwal</span>
+    <span>Plain HTML, CSS and a little JavaScript. Last updated November 2026.</span>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
